@@ -1,1 +1,6 @@
 rootProject.name = 'vrr'
+
+include 'common'
+include 'application:api'
+findProject(':application:api')?.name = 'api'
+
