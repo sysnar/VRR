@@ -26,9 +26,19 @@ subprojects {
 		mavenCentral()
 	}
 
+	configurations {
+		compileOnly {
+			extendsFrom annotationProcessor
+		}
+	}
+
 	dependencies {
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
+
+		implementation 'org.slf4j:jcl-over-slf4j'
+		implementation 'ch.qos.logback:logback-classic'
+
 		testImplementation 'org.springframework.boot:spring-boot-starter-test'
 		testImplementation('org.springframework.boot:spring-boot-starter-test') {
 			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
