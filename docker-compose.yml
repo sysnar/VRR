@@ -1,0 +1,16 @@
+version: '3'
+
+services:
+  db:
+    image: mysql:8
+    container_name: vrr-local
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: 'vrr'
+      MYSQL_ROOT_PASSWORD: '1234'
+      MYSQL_USER: 'vrr'
+      MYSQL_PASSWORD: 'password'
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
