@@ -39,7 +39,6 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
     private final AppProperties appProperties;
     private final HttpCookieOAuth2AuthorizationRequestRepository authorizationRequestRepository;
 
-
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         String targetUrl = determineTargetUrl(request, response, authentication);
@@ -62,58 +61,14 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         }
 
         String targetUrl = redirectUri.orElse(getDefaultTargetUrl());
-
-        OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
-        ProviderType providerType = ProviderType.valueOf(authToken.getAuthorizedClientRegistrationId().toUpperCase());
-
-        OAuth2User user = (OAuth2User) authentication.getPrincipal();
-        OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
-        Collection<? extends GrantedAuthority> authorities = ((OAuth2User) authentication.getPrincipal()).getAuthorities();
-
-        RoleType roleType = hasAuthority(authorities, RoleType.ADMIN.getCode()) ? RoleType.ADMIN : RoleType.USER;
-
-        Date now = new Date();
-        System.out.println("now = " + now);
-        AuthToken accessToken = tokenProvider.createAuthToken(
-                userInfo.getId(),
-                roleType.getCode(),
-                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
-        );
-
-        // refresh 토큰 설정
-        long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
-
-        AuthToken refreshToken = tokenProvider.createAuthToken(
-                appProperties.getAuth().getTokenSecret(),
-                new Date(now.getTime() + refreshTokenExpiry)
-        );
-
-        int cookieMaxAge = (int) refreshTokenExpiry / 60;
-
-        CookieUtils.deleteCookie(request, response, REFRESH_TOKEN);
-        CookieUtils.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
-
         return UriComponentsBuilder.fromUriString(targetUrl)
-                .queryParam("token", accessToken.getToken())
+                .queryParam("token", getAccessTokenAndSetRefreshToken(request, response, authentication))
                 .build().toUriString();
     }
 
     protected void clearAuthenticationAttributes(HttpServletRequest request, HttpServletResponse response) {
         super.clearAuthenticationAttributes(request);
         authorizationRequestRepository.removeAuthorizationRequestCookies(request, response);
-    }
-
-    private boolean hasAuthority(Collection<? extends GrantedAuthority> authorities, String authority) {
-        if (authorities == null) {
-            return false;
-        }
-
-        for (GrantedAuthority grantedAuthority : authorities) {
-            if (authority.equals(grantedAuthority.getAuthority())) {
-                return true;
-            }
-        }
-        return false;
     }
 
     private boolean isAuthorizedRedirectUri(String uri) {
@@ -130,5 +85,53 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
                     }
                     return false;
                 });
+    }
+
+    private String getAccessTokenAndSetRefreshToken(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+        Date now = new Date();
+
+        // access 토큰 생성
+        AuthToken accessToken = tokenProvider.createAuthToken(
+                getOAuth2UserInfo(authentication).getId(),
+                getRoleType(authentication).getCode(),
+                new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
+        );
+
+        // refresh 토큰 생성
+        long refreshTokenExpiry = appProperties.getAuth().getRefreshTokenExpiry();
+        AuthToken refreshToken = tokenProvider.createAuthToken(
+                appProperties.getAuth().getTokenSecret(),
+                new Date(now.getTime() + refreshTokenExpiry)
+        );
+
+        int cookieMaxAge = (int) refreshTokenExpiry / 60;
+        CookieUtils.deleteCookie(request, response, REFRESH_TOKEN);
+        CookieUtils.addCookie(response, REFRESH_TOKEN, refreshToken.getToken(), cookieMaxAge);
+        return accessToken.getToken();
+    }
+
+    private OAuth2UserInfo getOAuth2UserInfo(Authentication authentication) {
+        OAuth2AuthenticationToken authToken = (OAuth2AuthenticationToken) authentication;
+        ProviderType providerType = ProviderType.valueOf(authToken.getAuthorizedClientRegistrationId().toUpperCase());
+        OAuth2User user = (OAuth2User) authentication.getPrincipal();
+        return OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
+    }
+
+    private RoleType getRoleType(Authentication authentication) {
+        Collection<? extends GrantedAuthority> authorities = ((OAuth2User) authentication.getPrincipal()).getAuthorities();
+        return hasAuthority(authorities, RoleType.ADMIN.getCode()) ? RoleType.ADMIN : RoleType.USER;
+    }
+
+    private boolean hasAuthority(Collection<? extends GrantedAuthority> authorities, String authority) {
+        if (authorities == null) {
+            return false;
+        }
+
+        for (GrantedAuthority grantedAuthority : authorities) {
+            if (authority.equals(grantedAuthority.getAuthority())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
