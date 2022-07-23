@@ -6,7 +6,8 @@ public enum ProviderType implements CodeType {
 
     GOOGLE("구글", "PVDTP_GOOGLE"),
     KAKAO("카카오", "PVDTP_KAKAO"),
-    NAVER("네이버", "PVDTP_NAVER");
+    NAVER("네이버", "PVDTP_NAVER"),
+    VRR("VRR", "PVDTP_VRR");
 
     private final String label;
     private final String code;
