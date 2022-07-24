@@ -1,29 +1,91 @@
 plugins {
-	id 'java'
+    id 'org.asciidoctor.jvm.convert' version '3.3.2'
+    id 'com.epages.restdocs-api-spec' version '0.16.0' // REST Docs API Specification 플러그인
 }
 
-version = '0.0.1-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+configurations {
+    asciidoctorExt
 }
 
 dependencies {
     implementation project(':common')
     implementation project(':domain')
 
+    // JPA MySQL 접근
     runtimeOnly 'mysql:mysql-connector-java'
 
+    // Spring Security + OAuth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'io.jsonwebtoken:jjwt-api:0.11.2'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+    testImplementation 'org.springframework.security:spring-security-test'
     runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.2'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.2'
 
-    annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    // Spring Config 설정
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    // REST Docs
+    asciidoctorExt 'org.springframework.restdocs:spring-restdocs-asciidoctor'
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+
+    // RestDocs API Spec 라이브러리
+    testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.16.0'
+}
+
+ext {
+    snippetsDir = file('build/generated-snippets')
 }
 
 test {
     useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+    dependsOn 'openapi3'
+    delete 'src/main/resources/static/document/restdocs'
+    delete 'src/main/resources/static/document/openapi3.yaml'
+}
+
+task copyRestDocs(type: Copy) {
+    dependsOn asciidoctor
+
+    from 'build/docs/asciidoc'
+    into 'src/main/resources/static/document/restdocs'
+}
+
+task copySwagger(type: Copy) {
+    dependsOn asciidoctor
+
+    from 'build/api-spec/openapi3.yaml'
+    into 'src/main/resources/static/document'
+}
+
+build {
+    dependsOn copyRestDocs
+    dependsOn copySwagger
+}
+
+bootJar {
+    dependsOn asciidoctor
+
+    from ('build/docs/asciidoc') {
+        into "BOOT-INF/classes/static/document/restdocs"
+    }
+
+    from ('build/api-spec/openapi3.yaml') {
+        into 'BOOT-INF/classes/static/document'
+    }
+}
+
+openapi3 {
+    servers = [{ url = 'http://localhost:8080' }]
+    title = 'VRR API'
+    description = 'VRR 프로젝트에서 사용되는 API 리스트들을 정리한 문서입니다'
+    version = '0.1.0'
+    format = 'yaml'
 }

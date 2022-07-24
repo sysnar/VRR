@@ -2,12 +2,6 @@ plugins {
     id 'java-library'
 }
 
-version 'unspecified'
-
-repositories {
-    mavenCentral()
-}
-
 dependencies {
     api project(':common')
 
