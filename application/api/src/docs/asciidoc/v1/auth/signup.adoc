@@ -1,0 +1,42 @@
+= POST 회원가입
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== REQUEST
+
+=== Request URL
+include::{snippets}/v1-auth-signup/httpie-request.adoc[]
+
+=== Request Headers
+- N/A
+
+=== Request Path Parameters
+- N/A
+
+=== Request Body
+include::{snippets}/v1-auth-signup/request-body.adoc[]
+
+=== Request Fields
+include::{snippets}/v1-auth-signup/request-fields.adoc[]
+
+=== Request HTTP Example
+include::{snippets}/v1-auth-signup/http-request.adoc[]
+
+== RESPONSE
+
+=== Response Body
+include::{snippets}/v1-auth-signup/response-body.adoc[]
+
+=== Response HTTP Example
+include::{snippets}/v1-auth-signup/http-response.adoc[]
+
+=== Response Fields
+- N/A

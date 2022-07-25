@@ -1,0 +1,46 @@
+= POST 로그인
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== REQUEST
+
+=== Request URL
+include::{snippets}/v1-auth-signin/httpie-request.adoc[]
+
+=== Request Headers
+- N/A
+
+=== Request Path Parameters
+- N/A
+
+=== Request Body
+include::{snippets}/v1-auth-signin/request-body.adoc[]
+
+=== Request Fields
+include::{snippets}/v1-auth-signin/request-fields.adoc[]
+
+=== Request HTTP Example
+include::{snippets}/v1-auth-signin/http-request.adoc[]
+
+== RESPONSE
+
+=== Response Headers
+include::{snippets}/v1-auth-signin/response-headers.adoc[]
+
+=== Response Body
+include::{snippets}/v1-auth-signin/response-body.adoc[]
+
+=== Response Fields
+include::{snippets}/v1-auth-signin/response-fields.adoc[]
+
+=== Response HTTP Example
+include::{snippets}/v1-auth-signin/http-response.adoc[]
+

@@ -1,0 +1,51 @@
+= 공통 권한 인증 방식
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+:hardbreaks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== 1. 요청방법
+인증이 필요한 API 요청을 보낼 때에는 Authorization HTTP 헤더를 추가해주시기 바랍니다.
+Authorization 헤더의 값은 다음과 같은 형식을 가져야합니다.
+
+1. 값은 반드시 Bearer로 시작해야 합니다.
+2. Bearer 뒤에는 사전에 발급받은 엑세스 토큰을 가져야 합니다.
+3. Bearer와 엑세스 토큰은 사이에 공백문자 하나를 가져야 합니다.
+
+예시 - Authorization : Bearer {ACCESS_TOKEN}
+
+=== 요청 예시
+[source, http]
+----
+POST /api/1/tour HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer {ACCESS_TOKEN}
+Accept: application/json
+Content-Length: 30
+Host: localhost:8080
+----
+
+== 2. 응답결과
+[cols=2*]
+|===
+|HTTP 상태코드
+|설명
+
+|401 UnAuthorized
+|엑세스 토큰이 잘못되었거나, 비어있는 경우 등등 인증에 실패한 경우 반환하는 상태코드
+
+| NONE
+| 4xx번 대 상태코드를 반환하지 않는다면 인증처리가 정상적으로 처리된 것이다.
+|===
+
+== 3. 주의사항
+HTTP 헤더에 Authorization을 추가할 경우 인증을 받은 사용자임을 명시하는 것으로 간주합니다.
+따라서 인증이 필요없는 API 임에도 HTTP 헤더에 잘못된 Authorization 헤더 값을 넣게 되면 401 에러를 반환합니다.
+
