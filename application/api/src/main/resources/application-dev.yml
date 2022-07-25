@@ -1,0 +1,28 @@
+logging:
+  level:
+    org.hibernate.SQL: trace
+    org.hibernate.type: trace
+
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/vrr?serverTimezone=UTC&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+app:
+  oauth2:
+    authorizedRedirectUris:
+      - http://localhost:3000/oauth/redirect

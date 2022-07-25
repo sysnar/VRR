@@ -1,9 +1,9 @@
-version: '3'
+version: '3.8'
 
 services:
-  db:
+  mysql_db:
+    container_name: vrr-mysql
     image: mysql:8
-    container_name: vrr-local
     ports:
       - '3306:3306'
     environment:
@@ -14,3 +14,30 @@ services:
     command:
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
+    networks:
+      - vrr-network_01
+
+  application:
+    container_name: vrr-api
+    image: 931564842583.dkr.ecr.ap-northeast-2.amazonaws.com/vrr_ecr:1
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/vrr?serverTimezone=UTC&characterEncoding=UTF-8
+      SPRING_DATASOURCE_USERNAME: "root"
+      SPRING_DATASOURCE_PASSWORD: "1234"
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+      KAKAO_CLIENT_ID: ${KAKAO_CLIENT_ID}
+      KAKAO_CLIENT_SECRET: ${KAKAO_CLIENT_SECRET}
+      NAVER_CLIENT_ID: ${NAVER_CLIENT_ID}
+      NAVER_CLIENT_SECRET: ${NAVER_CLIENT_SECRET}
+    restart: on-failure
+    depends_on:
+      - mysql_db
+    networks:
+      - vrr-network_01
+
+networks:
+  vrr-network_01:
+    driver: bridge
