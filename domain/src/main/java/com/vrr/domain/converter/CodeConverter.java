@@ -1,4 +1,4 @@
-package com.vrr.domain.converter.auth;
+package com.vrr.domain.converter;
 
 import com.vrr.common.code.CodeType;
 

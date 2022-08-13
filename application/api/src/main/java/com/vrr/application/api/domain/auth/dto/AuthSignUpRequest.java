@@ -2,7 +2,7 @@ package com.vrr.application.api.domain.auth.dto;
 
 import com.vrr.common.code.auth.ProviderType;
 import com.vrr.common.code.auth.RoleType;
-import com.vrr.domain.entity.auth.User;
+import com.vrr.domain.auth.domain.User;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 

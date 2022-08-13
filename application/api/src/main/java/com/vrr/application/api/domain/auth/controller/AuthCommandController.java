@@ -5,7 +5,7 @@ import com.vrr.application.api.domain.auth.dto.AuthSignInResponse;
 import com.vrr.application.api.domain.auth.dto.AuthSignUpRequest;
 import com.vrr.application.api.domain.auth.service.UserCreator;
 import com.vrr.application.api.domain.auth.service.AuthResolver;
-import com.vrr.domain.entity.auth.User;
+import com.vrr.domain.auth.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -28,14 +28,14 @@ public class AuthCommandController {
 
     @PostMapping("/signin")
     public ResponseEntity<AuthSignInResponse> signIn(HttpServletRequest request,
-                                 HttpServletResponse response,
-                                 @Validated @RequestBody AuthSignInRequest signInRequest) {
+                                                     HttpServletResponse response,
+                                                     @Validated @RequestBody AuthSignInRequest signInRequest) {
         return ResponseEntity.created(URI.create("/signIn"))
                 .body(authResolver.signIn(request, response, signInRequest));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity signUp(@Validated @RequestBody AuthSignUpRequest signUpRequest) {
+    public ResponseEntity<String> signUp(@Validated @RequestBody AuthSignUpRequest signUpRequest) {
         User newUser = userCreator.create(signUpRequest);
         return ResponseEntity.created(URI.create("/signup/" + newUser.getId()))
                 .body(null);

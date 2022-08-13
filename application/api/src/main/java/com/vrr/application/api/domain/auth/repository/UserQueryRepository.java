@@ -1,6 +1,6 @@
 package com.vrr.application.api.domain.auth.repository;
 
-import com.vrr.domain.entity.auth.User;
+import com.vrr.domain.auth.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

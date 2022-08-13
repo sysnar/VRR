@@ -1,7 +1,9 @@
-package com.vrr.domain.entity.auth;
+package com.vrr.domain.auth;
 
 import com.vrr.common.code.auth.ProviderType;
 import com.vrr.common.code.auth.RoleType;
+import com.vrr.domain.auth.domain.User;
+import com.vrr.domain.auth.domain.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -11,7 +13,6 @@ import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-//@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE) // 실제 DB를 활용해 테스트하고 싶은 때 사용
 @DataJpaTest
 class UserRepositoryTest {
 

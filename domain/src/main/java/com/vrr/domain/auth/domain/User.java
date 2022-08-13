@@ -1,8 +1,10 @@
-package com.vrr.domain.entity.auth;
+package com.vrr.domain.auth.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vrr.common.code.auth.ProviderType;
 import com.vrr.common.code.auth.RoleType;
+import com.vrr.domain.converter.auth.RoleTypeConverter;
+import com.vrr.domain.converter.auth.ProviderTypeConverter;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,11 +17,11 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@Getter @Builder
+
+@Entity
+@Table(name = "VRR_USER")@Getter @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
-@Table(name = "VRR_USER")
 public class User {
 
     @JsonIgnore
@@ -60,10 +62,12 @@ public class User {
 
     @Column(name = "PROVIDER_TYPE", length = 20)
     @NotNull
+    @Convert(converter = ProviderTypeConverter.class)
     private ProviderType providerType;
 
     @Column(name = "ROLE_TYPE", length = 20)
     @NotNull
+    @Convert(converter = RoleTypeConverter.class)
     private RoleType roleType;
 
     @Column(name = "CREATED_AT")

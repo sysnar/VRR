@@ -1,11 +1,10 @@
-package com.vrr.domain.converter;
+package com.vrr.domain.converter.auth;
 
 import com.vrr.common.code.auth.RoleType;
-import com.vrr.domain.converter.auth.CodeConverter;
+import com.vrr.domain.converter.CodeConverter;
 
 import javax.persistence.Converter;
 
-@Converter(autoApply = true)
 public class RoleTypeConverter extends CodeConverter<RoleType> {
 
     public RoleTypeConverter() {

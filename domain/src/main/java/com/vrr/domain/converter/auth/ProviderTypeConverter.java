@@ -1,10 +1,10 @@
 package com.vrr.domain.converter.auth;
 
 import com.vrr.common.code.auth.ProviderType;
+import com.vrr.domain.converter.CodeConverter;
 
 import javax.persistence.Converter;
 
-@Converter(autoApply = true)
 public class ProviderTypeConverter extends CodeConverter<ProviderType> {
 
     public ProviderTypeConverter() {
