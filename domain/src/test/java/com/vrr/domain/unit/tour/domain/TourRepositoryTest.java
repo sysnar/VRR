@@ -1,6 +1,8 @@
-package com.vrr.domain.tour.domain;
+package com.vrr.domain.unit.tour.domain;
 
 import com.vrr.common.code.tour.TourType;
+import com.vrr.domain.tour.domain.Tour;
+import com.vrr.domain.tour.domain.TourRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ class TourRepositoryTest {
     }
 
     @Test
-    void 투어_제목_타입_정상조회() {
+    void find_tour_title_type_() {
         // given
         tourRepository.save(aTour()
                 .title("삼각지로 바이크 타고 카페 나들이!")
@@ -41,7 +43,7 @@ class TourRepositoryTest {
     }
 
     @Test
-    void 투어_생성일_수정일_정상생성() {
+    void create_tour_with_createdAt_updatedAt() {
         // given
         LocalDateTime now = LocalDateTime.now();
         tourRepository.save(aTour().build());

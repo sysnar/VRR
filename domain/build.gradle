@@ -1,5 +1,15 @@
 plugins {
     id 'java-library'
+    id 'java-test-fixtures'
+    id 'maven-publish'
+}
+
+bootJar {
+    enabled = false
+}
+
+jar {
+    enabled = true
 }
 
 dependencies {
@@ -7,7 +17,10 @@ dependencies {
 
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
     api 'org.springframework.boot:spring-boot-starter-validation'
-    testImplementation 'com.h2database:h2'
+
+    testFixturesRuntimeOnly 'com.h2database:h2'
+    testFixturesApi 'io.rest-assured:rest-assured'
+    testFixturesApi 'org.springframework.boot:spring-boot-starter-test'
 }
 
 test {

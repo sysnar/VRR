@@ -1,8 +1,5 @@
-package com.vrr.application.api.domain.auth.controller;
+package com.vrr.application.api.domain.auth.api.v1.auth;
 
-import com.vrr.application.api.domain.auth.dto.AuthSignInRequest;
-import com.vrr.application.api.domain.auth.dto.AuthSignInResponse;
-import com.vrr.application.api.domain.auth.dto.AuthSignUpRequest;
 import com.vrr.application.api.domain.auth.service.UserCreator;
 import com.vrr.application.api.domain.auth.service.AuthResolver;
 import com.vrr.domain.auth.domain.User;
@@ -20,7 +17,7 @@ import java.net.URI;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/1/auth")
+@RequestMapping("/api/v1/auth")
 public class AuthCommandController {
 
     private final UserCreator userCreator;

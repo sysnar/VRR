@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.auth.controller;
+package com.vrr.application.api.acceptance.domain.auth.api.v1.auth;
 
 import com.epages.restdocs.apispec.ResourceDocumentation;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest
 @AutoConfigureRestDocs
-public class AuthSignUpControllerTest {
+class AuthSignUpControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -55,7 +55,7 @@ public class AuthSignUpControllerTest {
         given(userCreator.create(any())).willReturn(new User());
 
         // then
-        mockMvc.perform(post("/api/1/auth/signup")
+        mockMvc.perform(post("/api/v1/auth/signup")
                         .contentType(MediaType.APPLICATION_JSON)
                         .with(SecurityMockMvcRequestPostProcessors.csrf())
                         .content(objectMapper.writeValueAsString(body))

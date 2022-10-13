@@ -1,4 +1,4 @@
-package com.vrr.domain.auth;
+package com.vrr.domain.unit.auth;
 
 import com.vrr.common.code.auth.ProviderType;
 import com.vrr.common.code.auth.RoleType;
@@ -20,7 +20,7 @@ class UserRepositoryTest {
     private UserRepository userRepository;
 
     @Test
-    void OAUTH2_유저_생성_테스트() {
+    void OAUTH2_User_Creation_Test() {
         // given
         LocalDateTime signUpDate = LocalDateTime.of(2022, 6, 8, 9, 20);
         User user = new User(UUID.randomUUID().toString(), "김상윤", "sysn4r@gmail.com", "Y", "https://sysnar.github.io/images/profile-avatar.png", ProviderType.GOOGLE, RoleType.USER, signUpDate, signUpDate);

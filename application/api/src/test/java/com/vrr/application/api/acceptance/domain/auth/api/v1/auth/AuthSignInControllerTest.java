@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.auth.controller;
+package com.vrr.application.api.acceptance.domain.auth.api.v1.auth;
 
 import com.epages.restdocs.apispec.ResourceDocumentation;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
@@ -63,7 +63,7 @@ class AuthSignInControllerTest {
                 .build());
 
         // then
-        mockMvc.perform(post("/api/1/auth/signin")
+        mockMvc.perform(post("/api/v1/auth/signin")
                         .contentType(MediaType.APPLICATION_JSON)
                         .with(SecurityMockMvcRequestPostProcessors.csrf())
                         .content(objectMapper.writeValueAsString(body))

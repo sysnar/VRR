@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.auth.dto;
+package com.vrr.application.api.domain.auth.api.v1.auth;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -19,6 +19,6 @@ public class AuthSignInRequest {
 
     @NotBlank(message = "비밀번호를 입력해주세요")
     @Pattern(message = "비밀번호 형식이 올바르지 않습니다",
-            regexp = "(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,50}")
+            regexp = "(?=.*\\d)(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,50}")
     private String password;
 }

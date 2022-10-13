@@ -1,7 +1,7 @@
 package com.vrr.application.api.domain.auth.service;
 
-import com.vrr.application.api.domain.auth.dto.AuthSignInRequest;
-import com.vrr.application.api.domain.auth.dto.AuthSignInResponse;
+import com.vrr.application.api.domain.auth.api.v1.auth.AuthSignInRequest;
+import com.vrr.application.api.domain.auth.api.v1.auth.AuthSignInResponse;
 import com.vrr.application.api.global.auth.properties.AppProperties;
 import com.vrr.application.api.global.auth.service.UserPrincipal;
 import com.vrr.application.api.global.auth.token.AuthToken;

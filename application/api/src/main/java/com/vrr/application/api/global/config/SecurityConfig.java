@@ -27,10 +27,11 @@ public class SecurityConfig {
     private final HttpCookieOAuth2AuthorizationRequestRepository cookieOAuth2AuthorizationRequestRepository;
     private final OAuth2AuthenticationSuccessHandler oauth2AuthenticationSuccessHandler;
     private final OAuth2AuthenticationFailerHandler oAuth2AuthenticationFailerHandler;
+    private final RestAuthenticationEntryPoint restAuthenticationEntryPoint;
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().antMatchers("/document/**");
+        return web -> web.ignoring().antMatchers("/document/**");
     }
 
     @Bean
@@ -44,11 +45,11 @@ public class SecurityConfig {
                     .formLogin().disable()
                     .httpBasic().disable()
                     .exceptionHandling()
-                    .authenticationEntryPoint(new RestAuthenticationEntryPoint())
+                    .authenticationEntryPoint(restAuthenticationEntryPoint)
                     .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
                     .authorizeRequests()
-                    .antMatchers("/api/1/auth/*").permitAll()
+                    .antMatchers("/api/v1/auth/*").permitAll()
                     .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
 //                    .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
                     .anyRequest().authenticated()

@@ -10,10 +10,11 @@ configurations {
 dependencies {
     implementation project(':common')
     implementation project(':domain')
+    testImplementation testFixtures(project(':domain'))
 
     // JPA MySQL 접근
     runtimeOnly 'mysql:mysql-connector-java'
-    testImplementation 'com.h2database:h2'
+//    testImplementation 'com.h2database:h2'
 
     // Spring Security + OAuth2
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
@@ -75,7 +76,7 @@ bootJar {
     dependsOn asciidoctor
 
     from ('build/docs/asciidoc') {
-        into "BOOT-INF/classes/static/document/restdocs"
+        into 'BOOT-INF/classes/static/document/restdocs'
     }
 
     from ('build/api-spec/openapi3.yaml') {

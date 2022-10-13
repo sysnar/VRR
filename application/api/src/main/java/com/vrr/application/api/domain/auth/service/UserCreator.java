@@ -1,6 +1,6 @@
 package com.vrr.application.api.domain.auth.service;
 
-import com.vrr.application.api.domain.auth.dto.AuthSignUpRequest;
+import com.vrr.application.api.domain.auth.api.v1.auth.AuthSignUpRequest;
 import com.vrr.application.api.domain.auth.repository.UserQueryRepository;
 import com.vrr.common.annotation.ApplicationService;
 import com.vrr.domain.auth.domain.User;

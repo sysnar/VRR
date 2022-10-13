@@ -19,6 +19,10 @@ public class TourGroup {
     @OneToMany(mappedBy = "tour", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<TourMember> members = new ArrayList<>();
 
+    public TourGroup(TourMember leader) {
+        this.members = List.of(leader);
+    }
+
     public void addMember(TourMember member) {
         if (member.isLeader() && members.isEmpty()) {
                 throw new IllegalStateException("Can't add leader, tour already have members");

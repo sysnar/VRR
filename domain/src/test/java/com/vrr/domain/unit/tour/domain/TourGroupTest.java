@@ -1,7 +1,11 @@
-package com.vrr.domain.tour.domain;
+package com.vrr.domain.unit.tour.domain;
 
 import com.vrr.common.code.tour.MemberType;
 import com.vrr.common.code.tour.TourType;
+import com.vrr.domain.tour.domain.Tour;
+import com.vrr.domain.tour.domain.TourGroup;
+import com.vrr.domain.tour.domain.TourMember;
+import com.vrr.domain.tour.domain.TourRepository;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,23 +26,23 @@ class TourGroupTest {
     }
 
     @Test
-    void 투어_주최자_등록() {
+    void add_tour_organizer() {
         // given
-        Tour savedTour = tourRepository.save(aTour()
-                .title("삼각지로 바이크 타고 카페 나들이!")
-                .type(TourType.SLOW)
-                .build());
         TourMember leader = TourMember.builder()
-                .tour(savedTour)
                 .userId(1L)
                 .type(MemberType.LEADER)
                 .build();
+        Tour tour = aTour()
+                .tourGroup(new TourGroup(leader))
+                .title("삼각지로 바이크 타고 카페 나들이!")
+                .type(TourType.SLOW)
+                .build();
 
         // when
-        savedTour.addMember(leader);
+        tourRepository.save(tour);
 
         // then
-        Tour tour = tourRepository.findAll().get(0);
-        assertThat(tour.getLeader().getUserId()).isEqualTo(1L);
+        Tour savedTour = tourRepository.findAll().get(0);
+        assertThat(savedTour.getLeader().getUserId()).isEqualTo(1L);
     }
 }
