@@ -38,9 +38,7 @@ public class AuthTokenProvider {
     }
 
     public UsernamePasswordAuthenticationToken getAuthentication(AuthToken authToken) {
-
         if(authToken.validate()) {
-
             Claims claims = authToken.getTokenClaims();
             Collection<? extends GrantedAuthority> authorities =
                     Arrays.stream(new String[]{claims.get(AUTHORITIES_KEY).toString()})

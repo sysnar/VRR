@@ -1,5 +1,6 @@
 package com.vrr.application.api.domain;
 
+import com.vrr.application.api.global.auth.annotation.CurrentUserSerial;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -12,8 +13,8 @@ public class Controller {
     }
 
     @GetMapping("/api/1")
-    public String sh() {
-        return "hello";
+    public String sh(@CurrentUserSerial String serial) {
+        return serial;
     }
 
 }

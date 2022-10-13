@@ -16,7 +16,7 @@ import java.util.*;
 @Builder
 public class UserPrincipal implements UserDetails, OAuth2User {
 
-    private final String id;
+    private final String serialNumber;
     private final String username;
     private final String email;
     private final String password;
@@ -32,12 +32,12 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
     @Override
     public String getName() {
-        return id;
+        return serialNumber;
     }
 
     @Override
     public String getUsername() {
-        return id;
+        return email;
     }
 
     @Override
@@ -47,7 +47,7 @@ public class UserPrincipal implements UserDetails, OAuth2User {
 
     public static UserPrincipal create(final User user) {
         return UserPrincipal.builder()
-                .id(user.getSerialNumber())
+                .serialNumber(user.getSerialNumber())
                 .email(user.getEmail())
                 .username(user.getUsername())
                 .password(user.getPassword())

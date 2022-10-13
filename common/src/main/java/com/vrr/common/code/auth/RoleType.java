@@ -25,4 +25,8 @@ public enum RoleType implements CodeType {
     public String getLabel() {
         return label;
     }
+
+    public String getAuthority() {
+        return "[" + code + "]";
+    }
 }

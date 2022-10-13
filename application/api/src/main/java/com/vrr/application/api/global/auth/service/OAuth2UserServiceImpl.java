@@ -17,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import javax.naming.AuthenticationException;
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -45,11 +44,9 @@ public class OAuth2UserServiceImpl extends DefaultOAuth2UserService {
         ProviderType providerType = ProviderType.valueOf(userRequest.getClientRegistration().getRegistrationId().toUpperCase());
 
         OAuth2UserInfo userInfo = OAuth2UserInfoFactory.getOAuth2UserInfo(providerType, user.getAttributes());
-        Optional<User> userOptional = userRepository.findBySerialNumber(userInfo.getId());
+        User savedUser = userRepository.findByEmail(userInfo.getId());
 
-        User savedUser;
-        if (userOptional.isPresent()) {
-            savedUser = userOptional.get();
+        if (savedUser != null) {
             if (providerType != savedUser.getProviderType()) {
                 throw new OAuthProviderMissMatchException(
                         "Looks like you're signed up with " + providerType + "account. " +

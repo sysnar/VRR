@@ -11,6 +11,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
@@ -32,7 +33,7 @@ public class AuthSignUpRequest {
 
     public User toUser(PasswordEncoder passwordEncoder) {
         return User.builder()
-                .serialNumber(email)
+                .serialNumber(UUID.randomUUID().toString())
                 .username(username)
                 .email(email)
                 .password(passwordEncoder.encode(password))

@@ -19,13 +19,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String emailOrUuid) throws UsernameNotFoundException {
-        User storedUser = userRepository.findBySerialNumber(emailOrUuid)
-                .orElseThrow(() -> {
-                    log.warn("No record found for storedUser with emailOrId {}", emailOrUuid);
-                    throw new UsernameNotFoundException("User with emailOrId " + emailOrUuid + " not fount");
-                });
+    public UserDetails loadUserByUsername(String emailOrSerialNumber) throws UsernameNotFoundException {
+        User user = userRepository.findBySerialNumber(emailOrSerialNumber);
 
-        return UserPrincipal.create(storedUser);
+        if (user == null) {
+            user = userRepository.findByEmail(emailOrSerialNumber);
+        }
+
+        if (user == null) {
+            log.warn("No record found for storedUser with emailOrId {}", emailOrSerialNumber);
+            throw new UsernameNotFoundException("User with emailOrId " + emailOrSerialNumber + " not fount");
+        }
+
+        return UserPrincipal.create(user);
     }
 }
