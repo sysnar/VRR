@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static com.vrr.domain.Fixtures.aTour;
+import static com.vrr.domain.fixtures.TourFixtures.aTour;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest

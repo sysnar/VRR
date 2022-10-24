@@ -50,9 +50,10 @@ public class AuthResolver {
 
     private AuthTokens generateTokens(AuthSignInRequest signInRequest, Authentication authentication) {
         Date now = new Date();
+        UserPrincipal principal = (UserPrincipal) authentication.getPrincipal();
         AuthToken accessToken = tokenProvider.createAuthToken(
-                signInRequest.getEmail(),
-                ((UserPrincipal) authentication.getPrincipal()).getAuthorities().toString(),
+                principal.getSerialNumber(),
+                principal.getAuthorities().toString(),
                 new Date(now.getTime() + appProperties.getAuth().getTokenExpiry())
         );
 

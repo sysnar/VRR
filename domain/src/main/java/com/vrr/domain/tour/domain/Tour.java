@@ -50,15 +50,15 @@ public class Tour {
     @Column(name = "OPEN")
     private boolean open;
 
-    @Column(name = "DEPARTURE")
+    @Column(name = "DEPARTURE_POINT")
     @NotNull
     @Size(max = 50)
-    private String departure;
+    private String departurePoint;
 
-    @Column(name = "ARRIVAL")
+    @Column(name = "ARRIVAL_POINT")
     @NotNull
     @Size(max = 50)
-    private String arrival;
+    private String arrivalPoint;
 
     @Column(name = "START_AT")
     @NotNull

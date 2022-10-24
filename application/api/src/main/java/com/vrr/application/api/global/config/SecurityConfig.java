@@ -11,6 +11,7 @@ import com.vrr.application.api.global.auth.service.OAuth2UserServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityCustomizer;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -50,7 +51,8 @@ public class SecurityConfig {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/api/v1/auth/*").permitAll()
-                    .antMatchers("/api/**").hasAnyAuthority(RoleType.USER.getCode())
+                    .antMatchers(HttpMethod.GET, "/api/v1/tour").permitAll()
+                    .antMatchers("/api/**").hasAnyAuthority("[" + RoleType.USER.getCode() + "]")
 //                    .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
                     .anyRequest().authenticated()
                 .and()

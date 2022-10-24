@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import static com.vrr.domain.Fixtures.*;
+import static com.vrr.domain.fixtures.TourFixtures.aTour;
+import static com.vrr.domain.fixtures.UserFixtures.*;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @DataJpaTest
@@ -28,12 +29,13 @@ class TourCreatorTest {
         User user = userRepository.save(aUser().build());
         Tour tour = aTour().build();
         TourForm tourForm = new TourForm(
-                user.getId(),
+                user.getSerialNumber(),
                 tour.getType(),
                 tour.getTitle(),
                 tour.getSummary(),
-                tour.getDeparture(),
-                tour.getArrival(),
+                tour.getDeparturePoint(),
+                tour.getArrivalPoint(),
+                tour.getStartAt(),
                 tour.getStartAt()
         );
 

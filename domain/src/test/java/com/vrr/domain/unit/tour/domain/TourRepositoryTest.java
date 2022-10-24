@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import java.time.LocalDateTime;
 import java.util.List;
 
-import static com.vrr.domain.Fixtures.aTour;
+import static com.vrr.domain.fixtures.TourFixtures.aTour;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest

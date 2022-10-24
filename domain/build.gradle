@@ -18,6 +18,12 @@ dependencies {
     api 'org.springframework.boot:spring-boot-starter-data-jpa'
     api 'org.springframework.boot:spring-boot-starter-validation'
 
+    //	QueryDsl
+    api 'com.querydsl:querydsl-jpa'
+    annotationProcessor 'com.querydsl:querydsl-apt:5.0.0:jpa'
+    annotationProcessor 'jakarta.persistence:jakarta.persistence-api'
+    annotationProcessor 'jakarta.annotation:jakarta.annotation-api'
+
     testFixturesRuntimeOnly 'com.h2database:h2'
     testFixturesApi 'io.rest-assured:rest-assured'
     testFixturesApi 'org.springframework.boot:spring-boot-starter-test'
@@ -25,4 +31,11 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+/**
+ * 인텔리제이 Annotation processor 에 생성되는 'src/main/generated' 디렉터리 삭제
+ */
+task cleanGeneatedDir(type: Delete) { // 인텔리제이 annotation processor 가 생성한 Q클래스가 clean 태스크로 삭제되는 게 불편하다면 둘 중에 하나를 선택
+    delete file('src/main/generated')
 }

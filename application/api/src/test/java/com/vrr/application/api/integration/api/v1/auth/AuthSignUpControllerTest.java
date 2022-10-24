@@ -1,8 +1,9 @@
-package com.vrr.application.api.acceptance.domain.auth.api.v1.auth;
+package com.vrr.application.api.integration.api.v1.auth;
 
 import com.epages.restdocs.apispec.ResourceDocumentation;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.vrr.application.api.domain.auth.api.v1.auth.AuthCommandController;
 import com.vrr.application.api.domain.auth.service.AuthResolver;
 import com.vrr.application.api.domain.auth.service.UserCreator;
 import com.vrr.application.api.global.libs.ApiDocumentUtils;
@@ -28,7 +29,7 @@ import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWit
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest
+@WebMvcTest(AuthCommandController.class)
 @AutoConfigureRestDocs
 class AuthSignUpControllerTest {
 

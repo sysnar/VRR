@@ -10,11 +10,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class TourForm {
 
-    private final Long userId;
+    private final String serial;
     private final TourType type;
     private final String title;
     private final String summary;
-    private final String departure;
-    private final String arrival;
+    private final String departurePoint;
+    private final String arrivalPoint;
     private final LocalDateTime startAt;
+    private final LocalDateTime endAt;
 }

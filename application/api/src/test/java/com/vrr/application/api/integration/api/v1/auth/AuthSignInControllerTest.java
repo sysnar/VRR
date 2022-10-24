@@ -1,4 +1,4 @@
-package com.vrr.application.api.acceptance.domain.auth.api.v1.auth;
+package com.vrr.application.api.integration.api.v1.auth;
 
 import com.epages.restdocs.apispec.ResourceDocumentation;
 import com.epages.restdocs.apispec.ResourceSnippetParameters;

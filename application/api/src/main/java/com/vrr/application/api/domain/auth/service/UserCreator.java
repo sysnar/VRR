@@ -1,7 +1,6 @@
 package com.vrr.application.api.domain.auth.service;
 
 import com.vrr.application.api.domain.auth.api.v1.auth.AuthSignUpRequest;
-import com.vrr.application.api.domain.auth.repository.UserQueryRepository;
 import com.vrr.common.annotation.ApplicationService;
 import com.vrr.domain.auth.domain.User;
 import com.vrr.domain.auth.domain.UserRepository;
@@ -9,13 +8,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Optional;
-
 @ApplicationService
 @RequiredArgsConstructor
 public class UserCreator {
 
-    private final UserQueryRepository userQueryRepository;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -27,8 +23,8 @@ public class UserCreator {
     }
 
     private void validateDuplicateEmail(AuthSignUpRequest signUpRequest) {
-        Optional<User> userOptional = userQueryRepository.findByEmail(signUpRequest.getEmail());
-        if (userOptional.isPresent()) {
+        User userOptional = userRepository.findByEmail(signUpRequest.getEmail());
+        if (userOptional != null) {
             throw new IllegalArgumentException("해당 이메일을 사용중인 사용자가 존재합니다.");
         }
     }

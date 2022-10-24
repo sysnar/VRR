@@ -7,10 +7,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import javax.naming.AuthenticationException;
 
 @Slf4j
 @RestControllerAdvice
@@ -38,7 +39,15 @@ public class GlobalExceptionHandler {
         log.error("HttpMessageNotReadableException := {}", e.getMessage());
         CommonErrorCode errorCode = CommonErrorCode.NOT_READABLE_PARAMETER;
         return ResponseEntity.status(errorCode.getHttpStatus())
-                .body(ErrorResponse.of(errorCode));
+                .body(ErrorResponse.of(errorCode, e.getMessage()));
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<ErrorResponse> handleAuthenticationException(AuthenticationException e) {
+        log.error("AuthenticationException := {}", e.getMessage());
+        CommonErrorCode errorCode = CommonErrorCode.UNAUTHORIZED;
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(ErrorResponse.of(errorCode, e.getMessage()));
     }
 
     /**

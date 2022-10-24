@@ -17,8 +17,8 @@ public class TourMapper {
                 .title(tourForm.getTitle())
                 .summary(tourForm.getSummary())
                 .type(tourForm.getType())
-                .departure(tourForm.getDeparture())
-                .arrival(tourForm.getArrival())
+                .departurePoint(tourForm.getDeparturePoint())
+                .arrivalPoint(tourForm.getArrivalPoint())
                 .startAt(tourForm.getStartAt())
                 .tourGroup(tourGroup)
                 .build();
