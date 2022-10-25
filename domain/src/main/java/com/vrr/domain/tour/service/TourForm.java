@@ -17,5 +17,6 @@ public class TourForm {
     private final String departurePoint;
     private final String arrivalPoint;
     private final LocalDateTime startAt;
-    private final LocalDateTime endAt;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 }

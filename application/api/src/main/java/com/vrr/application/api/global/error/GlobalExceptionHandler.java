@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -48,6 +50,17 @@ public class GlobalExceptionHandler {
         CommonErrorCode errorCode = CommonErrorCode.UNAUTHORIZED;
         return ResponseEntity.status(errorCode.getHttpStatus())
                 .body(ErrorResponse.of(errorCode, e.getMessage()));
+    }
+
+    /**
+     * Occurs when method is not able to process the request, while in business logic.
+     */
+    @ExceptionHandler(BindException.class)
+    protected ResponseEntity<ErrorResponse> handleIllegalStateException(BindException e) {
+        log.error("BindException := ", e);
+        CommonErrorCode errorCode = CommonErrorCode.INVALID_PARAMETER;
+        return ResponseEntity.status(errorCode.getHttpStatus())
+                .body(ErrorResponse.of(errorCode, errorCode.getMessage()));
     }
 
     /**

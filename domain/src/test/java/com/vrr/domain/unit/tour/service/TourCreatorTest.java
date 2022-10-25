@@ -36,7 +36,8 @@ class TourCreatorTest {
                 tour.getDeparturePoint(),
                 tour.getArrivalPoint(),
                 tour.getStartAt(),
-                tour.getStartAt()
+                tour.getCreatedAt(),
+                tour.getUpdatedAt()
         );
 
         // when

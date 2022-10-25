@@ -1,7 +1,7 @@
-logging:
-  level:
-    org.hibernate.SQL: trace
-    org.hibernate.type: trace
+#logging:
+#  level:
+#    org.hibernate.SQL: trace
+#    org.hibernate.type: trace
 
 spring:
   config:
@@ -16,7 +16,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         show_sql: true

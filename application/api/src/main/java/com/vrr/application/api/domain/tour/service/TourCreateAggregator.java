@@ -6,13 +6,11 @@ import com.vrr.common.annotation.ApplicationService;
 import com.vrr.domain.tour.domain.Tour;
 import com.vrr.domain.tour.service.TourCreator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @ApplicationService
 @RequiredArgsConstructor
 public class TourCreateAggregator {
 
-    @Autowired
     private final TourCreator tourCreator;
 
     public TourCreateResponse create(String serial, TourCreateRequest tourCreateRequest) {

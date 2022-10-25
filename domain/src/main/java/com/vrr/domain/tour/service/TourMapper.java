@@ -12,7 +12,12 @@ import java.time.LocalDateTime;
 public class TourMapper {
 
     public Tour mapFrom(Long userId, TourForm tourForm) {
-        TourGroup tourGroup = toTourGroup(userId);
+        Tour tour = toTour(tourForm);
+        tour.addMember(toTourMember(userId, tour));
+        return tour;
+    }
+
+    private Tour toTour(TourForm tourForm) {
         return Tour.builder()
                 .title(tourForm.getTitle())
                 .summary(tourForm.getSummary())
@@ -20,16 +25,19 @@ public class TourMapper {
                 .departurePoint(tourForm.getDeparturePoint())
                 .arrivalPoint(tourForm.getArrivalPoint())
                 .startAt(tourForm.getStartAt())
-                .tourGroup(tourGroup)
+                .createdAt(tourForm.getCreatedAt())
+                .updatedAt(tourForm.getUpdatedAt())
+                .open(true)
+                .tourGroup(new TourGroup())
                 .build();
     }
 
-    private TourGroup toTourGroup(Long userId) {
-        return new TourGroup(
-                TourMember.builder()
-                        .userId(userId)
-                        .type(MemberType.LEADER)
-                        .createdAt(LocalDateTime.now())
-                        .build());
+    private TourMember toTourMember(Long userId, Tour tour) {
+        return TourMember.builder()
+                .userId(userId)
+                .tour(tour)
+                .type(MemberType.LEADER)
+                .createdAt(LocalDateTime.now())
+                .build();
     }
 }

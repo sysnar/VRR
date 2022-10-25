@@ -24,8 +24,10 @@ public class TourGroup {
     }
 
     public void addMember(TourMember member) {
-        if (member.isLeader() && members.isEmpty()) {
-                throw new IllegalStateException("Can't add leader, tour already have members");
+        if (member.isLeader() && this.hasLeader()) {
+            throw new IllegalStateException("Can't add leader, tour already have members");
+        } else if (!member.isLeader() && members.isEmpty()) {
+            throw new IllegalStateException("Can't add member, tour leader is not registered");
         }
         members.add(member);
     }
@@ -36,5 +38,14 @@ public class TourGroup {
                 .findFirst()
                 .orElseThrow(() -> new IllegalStateException("Can't find leader"));
 
+    }
+
+    public boolean hasLeader() {
+        for (TourMember tourMember : members) {
+            if (tourMember.isLeader()) {
+                return true;
+            }
+        }
+        return false;
     }
 }

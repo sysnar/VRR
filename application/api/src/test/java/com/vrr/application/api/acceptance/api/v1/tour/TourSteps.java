@@ -43,4 +43,17 @@ public class TourSteps {
                 .statusCode(HttpStatus.OK.value())
                 .extract();
     }
+
+    public static ExtractableResponse<Response> TOUR_LIST_SECOND_REQUEST(String cursor) {
+        Map<String, String> params = new HashMap<>();
+        params.put("cursor", cursor);
+
+        return RestAssured
+                .given().log().all()
+                .queryParams(params)
+                .when().get("/api/v1/tour")
+                .then().log().all()
+                .statusCode(HttpStatus.OK.value())
+                .extract();
+    }
 }

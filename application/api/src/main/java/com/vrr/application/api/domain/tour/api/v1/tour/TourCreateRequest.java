@@ -20,9 +20,18 @@ public class TourCreateRequest {
         private String departurePoint;
         private String arrivalPoint;
         private LocalDateTime startAt;
-        private LocalDateTime endAt;
 
         public TourForm toTourForm(String serial) {
-                return new TourForm(serial, this.type, this.title, this.summary, this.departurePoint, this.arrivalPoint, this.startAt, this.endAt);
+                return new TourForm(
+                        serial,
+                        this.type,
+                        this.title,
+                        this.summary,
+                        this.departurePoint,
+                        this.arrivalPoint,
+                        this.startAt,
+                        LocalDateTime.now(),
+                        LocalDateTime.now()
+                );
         }
 }
