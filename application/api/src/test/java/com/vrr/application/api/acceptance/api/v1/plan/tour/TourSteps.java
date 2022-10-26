@@ -1,4 +1,4 @@
-package com.vrr.application.api.acceptance.api.v1.tour;
+package com.vrr.application.api.acceptance.api.v1.plan.tour;
 
 import com.vrr.common.code.tour.TourType;
 import io.restassured.RestAssured;
@@ -28,7 +28,7 @@ public class TourSteps {
                 .header("Authorization", "Bearer " + accessToken)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .body(params)
-                .when().post("/api/v1/tour")
+                .when().post("/api/v1/plan/tour")
                 .then().log().all()
                 .statusCode(HttpStatus.CREATED.value())
                 .extract();
@@ -43,7 +43,7 @@ public class TourSteps {
                 .header("Authorization", "Bearer " + accessToken)
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .pathParams(params)
-                .when().delete("/api/v1/tour/{tourId}")
+                .when().delete("/api/v1/plan/tour/{tourId}")
                 .then().log().all()
                 .statusCode(HttpStatus.NO_CONTENT.value())
                 .extract();
@@ -53,7 +53,7 @@ public class TourSteps {
         Map<String, String> params = new HashMap<>();
         return RestAssured
                 .given().log().all()
-                .when().get("/api/v1/tour")
+                .when().get("/api/v1/plan/tours")
                 .then().log().all()
                 .statusCode(HttpStatus.OK.value())
                 .extract();
@@ -66,7 +66,7 @@ public class TourSteps {
         return RestAssured
                 .given().log().all()
                 .queryParams(params)
-                .when().get("/api/v1/tour")
+                .when().get("/api/v1/plan/tours")
                 .then().log().all()
                 .statusCode(HttpStatus.OK.value())
                 .extract();

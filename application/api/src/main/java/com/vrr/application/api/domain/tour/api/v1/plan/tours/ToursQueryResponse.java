@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.tour.api.v1.tour;
+package com.vrr.application.api.domain.tour.api.v1.plan.tours;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -10,13 +10,13 @@ import java.util.List;
 
 @Getter
 @JsonInclude(Include.NON_NULL)
-public class TourQueryResponse {
+public class ToursQueryResponse {
 
     private final List<TourData> tours;
     private final int resultCount;
     private final String next;
 
-    public TourQueryResponse(Page<TourData> tours, String next) {
+    public ToursQueryResponse(Page<TourData> tours, String next) {
         this.tours = tours.getContent();
         this.resultCount = tours.getNumberOfElements();
         this.next = next;

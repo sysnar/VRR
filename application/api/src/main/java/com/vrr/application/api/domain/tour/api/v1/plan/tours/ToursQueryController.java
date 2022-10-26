@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.tour.api.v1.tour;
+package com.vrr.application.api.domain.tour.api.v1.plan.tours;
 
 import com.vrr.application.api.domain.tour.service.TourListAggregator;
 import lombok.RequiredArgsConstructor;
@@ -13,15 +13,15 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/tour")
-public class TourQueryController {
+@RequestMapping("/api/v1/plan/tours")
+public class ToursQueryController {
 
     private final TourListAggregator tourListAggregator;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public TourQueryResponse findTours(@Valid @ModelAttribute TourQueryRequest request,
-                                       @PageableDefault(size = 10, sort = "endDate", direction = DESC) Pageable pageable) {
+    public ToursQueryResponse findTours(@Valid @ModelAttribute ToursQueryRequest request,
+                                        @PageableDefault(size = 10, sort = "endDate", direction = DESC) Pageable pageable) {
         return tourListAggregator.listTours(request, pageable);
     }
 }

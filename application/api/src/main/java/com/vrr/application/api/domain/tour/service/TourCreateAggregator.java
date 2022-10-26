@@ -1,7 +1,7 @@
 package com.vrr.application.api.domain.tour.service;
 
-import com.vrr.application.api.domain.tour.api.v1.tour.TourCreateRequest;
-import com.vrr.application.api.domain.tour.api.v1.tour.TourCreateResponse;
+import com.vrr.application.api.domain.tour.api.v1.plan.tour.TourCreateRequest;
+import com.vrr.application.api.domain.tour.api.v1.plan.tour.TourCreateResponse;
 import com.vrr.common.annotation.ApplicationService;
 import com.vrr.domain.tour.domain.Tour;
 import com.vrr.domain.tour.service.TourCreator;

@@ -1,7 +1,7 @@
 package com.vrr.application.api.domain.tour.service;
 
-import com.vrr.application.api.domain.tour.api.v1.tour.TourQueryRequest;
-import com.vrr.application.api.domain.tour.api.v1.tour.TourQueryResponse;
+import com.vrr.application.api.domain.tour.api.v1.plan.tours.ToursQueryRequest;
+import com.vrr.application.api.domain.tour.api.v1.plan.tours.ToursQueryResponse;
 import com.vrr.application.api.domain.tour.repository.TourData;
 import com.vrr.application.api.domain.tour.repository.TourQueryRepository;
 import com.vrr.common.annotation.ApplicationService;
@@ -18,10 +18,10 @@ public class TourListAggregator {
 
     private final TourQueryRepository tourQueryRepository;
 
-    public TourQueryResponse listTours(TourQueryRequest tourQueryRequest, Pageable pageable) {
-        Page<TourData> tours = tourQueryRepository.findTours(tourQueryRequest.getCursor(), tourQueryRequest.getType(), pageable);
+    public ToursQueryResponse listTours(ToursQueryRequest toursQueryRequest, Pageable pageable) {
+        Page<TourData> tours = tourQueryRepository.findTours(toursQueryRequest.getCursor(), toursQueryRequest.getType(), pageable);
         TourData lastTourData = getLastTourData(tours);
-        return new TourQueryResponse(tours, generateCursor(lastTourData));
+        return new ToursQueryResponse(tours, generateCursor(lastTourData));
     }
 
     private TourData getLastTourData(Page<TourData> tourData) {

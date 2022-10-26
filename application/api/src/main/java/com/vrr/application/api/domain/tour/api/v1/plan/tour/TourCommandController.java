@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.tour.api.v1.tour;
+package com.vrr.application.api.domain.tour.api.v1.plan.tour;
 
 import com.vrr.application.api.domain.tour.service.TourCreateAggregator;
 import com.vrr.application.api.global.auth.annotation.CurrentUserSerial;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/tour")
+@RequestMapping("/api/v1/plan/tour")
 public class TourCommandController {
 
     private final TourCreateAggregator tourCreateAggregator;

@@ -51,7 +51,7 @@ public class SecurityConfig {
                 .and()
                     .authorizeRequests()
                     .antMatchers("/api/v1/auth/*").permitAll()
-                    .antMatchers(HttpMethod.GET, "/api/v1/tour").permitAll()
+                    .antMatchers(HttpMethod.GET, "/api/v1/plan/tours").permitAll()
                     .antMatchers("/api/**").hasAnyAuthority("[" + RoleType.USER.getCode() + "]")
 //                    .antMatchers("/api/**/admin/**").hasAnyAuthority(RoleType.ADMIN.getCode())
                     .anyRequest().authenticated()

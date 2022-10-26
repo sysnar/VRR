@@ -1,4 +1,4 @@
-package com.vrr.application.api.domain.tour.api.v1.tour;
+package com.vrr.application.api.domain.tour.api.v1.plan.tour;
 
 import com.vrr.common.code.tour.TourType;
 import com.vrr.domain.tour.service.TourForm;

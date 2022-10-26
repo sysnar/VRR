@@ -1,4 +1,4 @@
-package com.vrr.application.api.acceptance.api.v1.tour;
+package com.vrr.application.api.acceptance.api.v1.plan.tour;
 
 import com.vrr.application.api.acceptance.api.v1.auth.AuthSteps;
 import com.vrr.domain.fixtures.TourFixtures;
@@ -9,11 +9,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static com.vrr.application.api.acceptance.api.v1.auth.AuthSteps.USER_HAVE_SINGED_IN;
-import static com.vrr.application.api.acceptance.api.v1.tour.TourSteps.*;
+import static com.vrr.application.api.acceptance.api.v1.plan.tour.TourSteps.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("Tour Query API")
-class TourQueryControllerTest extends AcceptanceTest  {
+class ToursQueryControllerTest extends AcceptanceTest  {
 
     /**
      * Given : After 2 Tour have created.
