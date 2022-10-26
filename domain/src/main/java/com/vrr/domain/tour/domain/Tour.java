@@ -1,11 +1,10 @@
 package com.vrr.domain.tour.domain;
 
 import com.vrr.common.code.tour.TourType;
+import com.vrr.domain.auth.domain.User;
 import com.vrr.domain.converter.tour.TourTypeConverter;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.vrr.domain.tour.service.TourDeleteValidator;
+import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -72,11 +71,24 @@ public class Tour {
     @LastModifiedDate
     private LocalDateTime updatedAt;
 
+    @Column(name = "DELETED_AT")
+    private LocalDateTime deletedAt;
+
     public void addMember(TourMember member) {
         tourGroup.addMember(member);
     }
 
+    public void delete(String userSerial, LocalDateTime deletedAt,
+                       TourDeleteValidator tourDeleteValidator) {
+        tourDeleteValidator.validate(this, userSerial);
+        this.deletedAt = deletedAt;
+    }
+
     public TourMember getLeader() {
         return tourGroup.getLeader();
+    }
+
+    public boolean isLeader(User user) {
+        return getLeader().getUserId().equals(user.getId());
     }
 }

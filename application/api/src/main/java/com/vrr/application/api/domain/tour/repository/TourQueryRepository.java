@@ -30,7 +30,7 @@ public class TourQueryRepository {
                 .where(
                         computeCursor(cursor),
                         matchTourType(tourType),
-                        isTourOpen()
+                        isTourViewable()
                 )
                 .orderBy(tour.startAt.asc(), tour.id.desc())
                 .limit(pageable.getPageSize())
@@ -62,7 +62,8 @@ public class TourQueryRepository {
         return tour.type.eq(tourType);
     }
 
-    private BooleanExpression isTourOpen() {
-        return tour.open.isTrue();
+    private BooleanExpression isTourViewable() {
+        return tour.open.isTrue()
+                .and(tour.deletedAt.isNull());
     }
 }

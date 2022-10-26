@@ -44,6 +44,7 @@ public class DatabaseCleanup implements InitializingBean {
         jdbcTemplate.execute("CREATE ALIAS IF NOT EXISTS date_format FOR \"com.vrr.domain.utils.H2CustomAlias.date_format\"");
         jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY FALSE");
         for (String tableName : tableNames) {
+            jdbcTemplate.execute("ALTER TABLE " + tableName + " ALTER COLUMN id RESTART WITH 1");
             jdbcTemplate.execute("TRUNCATE TABLE " + tableName);
         }
         jdbcTemplate.execute("SET REFERENTIAL_INTEGRITY TRUE");

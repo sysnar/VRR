@@ -1,8 +1,10 @@
 package com.vrr.domain.fixtures;
 
+import com.vrr.common.code.tour.MemberType;
 import com.vrr.common.code.tour.TourType;
 import com.vrr.domain.tour.domain.Tour;
 import com.vrr.domain.tour.domain.TourGroup;
+import com.vrr.domain.tour.domain.TourMember;
 
 import java.time.LocalDateTime;
 
@@ -16,6 +18,10 @@ public class TourFixtures {
     public static LocalDateTime START_AT = LocalDateTime.of(2022, 8, 13, 12, 0);
     public static LocalDateTime END_AT = LocalDateTime.of(2022, 8, 13, 18, 0);
 
+    public static Tour.TourBuilder aTour(TourGroup tourGroup) {
+        return aTour().tourGroup(tourGroup);
+    }
+
     public static Tour.TourBuilder aTour() {
         return Tour.builder()
                 .tourGroup(new TourGroup())
@@ -26,5 +32,16 @@ public class TourFixtures {
                 .departurePoint("강남역,선릉역")
                 .arrivalPoint("서울특별시 용산구 한강대로 62나길 7-4")
                 .startAt(LocalDateTime.of(2022, 8, 13, 12, 0));
+    }
+
+    public static TourGroup aTourGroup(TourMember tourMember) {
+        return new TourGroup(tourMember);
+    }
+
+    public static TourMember.TourMemberBuilder aTourLeader(Long userId) {
+        return TourMember.builder()
+                .userId(userId)
+                .type(MemberType.LEADER)
+                .createdAt(LocalDateTime.of(2022, 8, 13, 12, 0));
     }
 }

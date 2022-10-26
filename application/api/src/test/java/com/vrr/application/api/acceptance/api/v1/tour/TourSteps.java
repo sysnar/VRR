@@ -34,6 +34,21 @@ public class TourSteps {
                 .extract();
     }
 
+    public static ExtractableResponse<Response> TOUR_DELETE_REQUEST(Long tourId, String accessToken) {
+        Map<String, Long> params = new HashMap<>();
+        params.put("tourId", tourId);
+
+        return RestAssured
+                .given().log().all()
+                .header("Authorization", "Bearer " + accessToken)
+                .contentType(MediaType.APPLICATION_JSON_VALUE)
+                .pathParams(params)
+                .when().delete("/api/v1/tour/{tourId}")
+                .then().log().all()
+                .statusCode(HttpStatus.NO_CONTENT.value())
+                .extract();
+    }
+
     public static ExtractableResponse<Response> TOUR_LIST_REQUEST() {
         Map<String, String> params = new HashMap<>();
         return RestAssured

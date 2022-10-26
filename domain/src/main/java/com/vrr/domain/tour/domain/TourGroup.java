@@ -20,7 +20,7 @@ public class TourGroup {
     private List<TourMember> members = new ArrayList<>();
 
     public TourGroup(TourMember leader) {
-        this.members = List.of(leader);
+        this.members = new ArrayList<>(List.of(leader));
     }
 
     public void addMember(TourMember member) {
