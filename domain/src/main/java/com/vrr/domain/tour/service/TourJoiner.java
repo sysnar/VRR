@@ -11,20 +11,18 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 
-
 @DomainService
 @RequiredArgsConstructor
-public class TourCreator {
+public class TourJoiner {
 
     private final UserRepository userRepository;
     private final TourRepository tourRepository;
 
     @Transactional
-    public Tour create(String userSerial, Tour tour, LocalDateTime now) {
-        User user = userRepository.findBySerial(userSerial)
-                .orElseThrow(() -> new IllegalArgumentException("None existing user"));
-
-        tour.addMember(user, MemberType.LEADER, now);
-        return tourRepository.save(tour);
+    public void join(Long tourId, String userSerial, LocalDateTime now) {
+        Tour tour = tourRepository.findById(tourId).orElseThrow(IllegalArgumentException::new);
+        User user = userRepository.findBySerial(userSerial).orElseThrow(IllegalArgumentException::new);
+        tour.addMember(user, MemberType.NORMAL, now);
+        tourRepository.save(tour);
     }
 }

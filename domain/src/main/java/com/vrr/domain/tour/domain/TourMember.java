@@ -42,7 +42,18 @@ public class TourMember {
     @CreatedDate
     private LocalDateTime createdAt;
 
+    public TourMember(Tour tour, Long userId, MemberType type, LocalDateTime createdAt) {
+        this.tour = tour;
+        this.userId = userId;
+        this.type = type;
+        this.createdAt = createdAt;
+    }
+
     public boolean isLeader() {
-        return type == MemberType.LEADER;
+        return this.type == MemberType.LEADER;
+    }
+
+    public boolean isSameUser(TourMember member) {
+        return this.getUserId().equals(member.getUserId());
     }
 }

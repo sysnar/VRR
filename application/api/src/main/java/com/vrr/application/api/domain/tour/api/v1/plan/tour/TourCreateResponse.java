@@ -8,7 +8,11 @@ public class TourCreateResponse {
 
     private final Long tourId;
 
-    public TourCreateResponse(Tour tour) {
-        this.tourId = tour.getId();
+    public TourCreateResponse(Long tourId) {
+        this.tourId = tourId;
+    }
+
+    public static TourCreateResponse of(Tour tour) {
+        return new TourCreateResponse(tour.getId());
     }
 }

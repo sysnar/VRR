@@ -1,5 +1,6 @@
 package com.vrr.domain.tour.domain;
 
+import com.vrr.common.code.tour.MemberType;
 import com.vrr.common.code.tour.TourType;
 import com.vrr.domain.auth.domain.User;
 import com.vrr.domain.converter.tour.TourTypeConverter;
@@ -74,8 +75,8 @@ public class Tour {
     @Column(name = "DELETED_AT")
     private LocalDateTime deletedAt;
 
-    public void addMember(TourMember member) {
-        tourGroup.addMember(member);
+    public void addMember(User user, MemberType type, LocalDateTime now) {
+        tourGroup.addMember(new TourMember(this, user.getId(), type, now));
     }
 
     public void delete(String userSerial, LocalDateTime deletedAt,

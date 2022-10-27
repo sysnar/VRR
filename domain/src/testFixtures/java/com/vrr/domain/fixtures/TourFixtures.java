@@ -34,10 +34,6 @@ public class TourFixtures {
                 .startAt(LocalDateTime.of(2022, 8, 13, 12, 0));
     }
 
-    public static TourGroup aTourGroup(TourMember tourMember) {
-        return new TourGroup(tourMember);
-    }
-
     public static TourMember.TourMemberBuilder aTourLeader(Long userId) {
         return TourMember.builder()
                 .userId(userId)

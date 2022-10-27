@@ -6,11 +6,11 @@ import com.vrr.domain.auth.domain.UserRepository;
 import com.vrr.domain.tour.domain.Tour;
 import com.vrr.domain.tour.domain.TourRepository;
 import com.vrr.domain.tour.service.TourCreator;
-import com.vrr.domain.tour.service.TourForm;
-import com.vrr.domain.tour.service.TourMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.time.LocalDateTime;
 
 import static com.vrr.domain.fixtures.TourFixtures.aTour;
 import static com.vrr.domain.fixtures.UserFixtures.*;
@@ -25,23 +25,12 @@ class TourCreatorTest {
     @Test
     void Should_CreateLeader_WhenTourFormIsNormal() {
         // given
-        TourCreator tourCreator = new TourCreator(userRepository, tourRepository, new TourMapper());
+        TourCreator tourCreator = new TourCreator(userRepository, tourRepository);
         User user = userRepository.save(aUser().build());
         Tour tour = aTour().build();
-        TourForm tourForm = new TourForm(
-                user.getSerialNumber(),
-                tour.getType(),
-                tour.getTitle(),
-                tour.getSummary(),
-                tour.getDeparturePoint(),
-                tour.getArrivalPoint(),
-                tour.getStartAt(),
-                tour.getCreatedAt(),
-                tour.getUpdatedAt()
-        );
 
         // when
-        tourCreator.create(tourForm);
+        tourCreator.create(user.getSerialNumber(), tour, LocalDateTime.now());
 
         // then
         Tour foundTour = tourRepository.findAll().get(0);

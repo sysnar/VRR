@@ -1,5 +1,6 @@
 package com.vrr.domain.unit.tour.service;
 
+import com.vrr.common.code.tour.MemberType;
 import com.vrr.domain.auth.domain.User;
 import com.vrr.domain.auth.domain.UserRepository;
 import com.vrr.domain.tour.domain.Tour;
@@ -33,11 +34,8 @@ class TourDeleterTest {
     public void beforeEach() {
         this.tourDeleter = new TourDeleter(tourRepository, new TourDeleteValidator(userRepository));
         this.user = userRepository.save(aUser().build());
-        this.tour = tourRepository.save(
-                aTour().tourGroup(
-                        aTourGroup(aTourLeader(user.getId()).build())
-                ).build()
-        );
+        this.tour = tourRepository.save(aTour().build());
+        this.tour.addMember(this.user, MemberType.LEADER, LocalDateTime.now());
     }
 
     @Test

@@ -1,6 +1,8 @@
 package com.vrr.application.api.acceptance.api.v1.plan.tour;
 
+import com.vrr.application.api.acceptance.api.v1.auth.AuthSteps;
 import com.vrr.common.code.tour.TourType;
+import com.vrr.domain.fixtures.TourFixtures;
 import io.restassured.RestAssured;
 import io.restassured.response.ExtractableResponse;
 import io.restassured.response.Response;
@@ -11,7 +13,15 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import static com.vrr.application.api.acceptance.api.v1.auth.AuthSteps.USER_HAVE_SINGED_IN;
+
 public class TourSteps {
+
+    public static Long TOUR_HAVE_CREATED() {
+        String accessToken = USER_HAVE_SINGED_IN(AuthSteps.USERNAME, AuthSteps.EMAIL, AuthSteps.PASSWORD);
+        ExtractableResponse<Response> response = TourSteps.TOUR_CREATE_REQUEST(TourFixtures.TITLE, TourFixtures.SUMMARY, TourFixtures.TYPE, TourFixtures.DEPARTURE_POINT, TourFixtures.ARRIVAL_POINT, TourFixtures.START_AT, TourFixtures.END_AT, accessToken);
+        return response.jsonPath().getLong("tourId");
+    }
 
     public static ExtractableResponse<Response> TOUR_CREATE_REQUEST(String title, String summary, TourType type, String departurePoint, String arrivalPoint, LocalDateTime startAt, LocalDateTime endAt, String accessToken) {
         Map<String, String> params = new HashMap<>();

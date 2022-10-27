@@ -14,6 +14,10 @@ public class AuthSteps {
     public static final String EMAIL = "test@email.com";
     public static final String PASSWORD = "password12#$";
 
+    public static final String MEMBER_USERNAME = "MEMBER";
+    public static final String MEMBER_EMAIL = "member@email.com";
+    public static final String MEMBER_PASSWORD = "memberPassword12#$";
+
     public static String USER_HAVE_SINGED_IN(String username, String email, String password) {
         USER_SIGNUP_REQUEST(username, email, password);
         ExtractableResponse<Response> response = USER_SIGNIN_REQUEST(email, password);

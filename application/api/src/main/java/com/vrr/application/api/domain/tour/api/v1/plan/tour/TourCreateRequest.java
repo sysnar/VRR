@@ -1,37 +1,44 @@
 package com.vrr.application.api.domain.tour.api.v1.plan.tour;
 
 import com.vrr.common.code.tour.TourType;
-import com.vrr.domain.tour.service.TourForm;
+import com.vrr.domain.tour.domain.Tour;
+import com.vrr.domain.tour.domain.TourGroup;
 import lombok.Getter;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
 public class TourCreateRequest {
 
-        private String title;
+    @NotBlank(message = "Title is required")
+    private String title;
 
-        @NotNull(message = "asdf")
-        private String summary;
+    @NotNull(message = "Summary is required")
+    private String summary;
 
-        @NotNull(message = "asdf")
-        private TourType type;
-        private String departurePoint;
-        private String arrivalPoint;
-        private LocalDateTime startAt;
+    @NotNull(message = "Tour type is required")
+    private TourType type;
+    @NotBlank(message = "DeparturePoint is required")
+    private String departurePoint;
+    @NotNull(message = "ArrivalPoint is required")
+    private String arrivalPoint;
+    @NotNull(message = "Start date is required")
+    private LocalDateTime startAt;
 
-        public TourForm toTourForm(String serial) {
-                return new TourForm(
-                        serial,
-                        this.type,
-                        this.title,
-                        this.summary,
-                        this.departurePoint,
-                        this.arrivalPoint,
-                        this.startAt,
-                        LocalDateTime.now(),
-                        LocalDateTime.now()
-                );
-        }
+    public Tour toEntity(LocalDateTime now) {
+        return Tour.builder()
+                .title(title)
+                .summary(summary)
+                .type(type)
+                .departurePoint(departurePoint)
+                .arrivalPoint(arrivalPoint)
+                .startAt(startAt)
+                .createdAt(now)
+                .updatedAt(now)
+                .open(true)
+                .tourGroup(new TourGroup())
+                .build();
+    }
 }
