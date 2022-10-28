@@ -70,6 +70,3 @@ app:
     authorizedRedirectUris:
       - ${REDIRECT_URIS}
 
-# JWT Secret Key 설정
-jwt:
-  secret: 'V33a0A1Vd081hjb3w43DSp667HK1ifVd081hjb3w33a0A1Vd081h'

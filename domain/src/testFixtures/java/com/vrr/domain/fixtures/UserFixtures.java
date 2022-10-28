@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 
 public class UserFixtures {
 
+    public final static String USERNAME = "sysnar";
+
     public static UserBuilder aUser() {
         return User.builder()
                 .serialNumber("22d4a8bc-9478-46b4-80cf-09e2bbbfb5a4")

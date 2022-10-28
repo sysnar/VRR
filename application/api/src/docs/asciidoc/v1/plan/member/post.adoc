@@ -1,0 +1,55 @@
+= POST 투어 참가
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== INFORMATION
+[source,http,options="nowrap"]
+----
+POST /api/v1/plan/member HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer ${ACCESS_TOKEN}
+Host: localhost:8080
+----
+
+로그인 후 사용자는 투어 참가 API를 활용해 기존에 생성된 투어에 참가할 수 있습니다.
+
+사용자 엑세스 토큰(Access Token)을 헤더에 담아 `POST` 로 요청합니다.
+참가하려는 팀의 고유 ID를 요청 Body에 추가하는 것으로 참가하려는 팀을 결정할 수 있습니다.
+
+삭제 성공 시 투어 멤버로 등록되며, 성공 시 별도의 응답값은 존재하지 않습니다.
+
+== REQUEST
+
+=== Request Headers
+include::{snippets}/v1/plan/member-post/request-headers.adoc[]
+* `Authorization` 헤더의 자세한 사용 방법은 link:../../../v1/auth/basic-authorization.html[공통 권한 인증 방식]을 참고해주세요.
+
+=== Request Body
+include::{snippets}/v1/plan/member-post/request-body.adoc[]
+
+=== Request Fields
+include::{snippets}/v1/plan/member-post/request-fields.adoc[]
+
+=== Request HTTP Example
+include::{snippets}/v1/plan/member-post/http-request.adoc[]
+
+
+== RESPONSE
+
+=== Response Body
+----
+No Body returned for response
+----
+
+=== Response HTTP Example
+include::{snippets}/v1/plan/member-post/http-response.adoc[]
+
+

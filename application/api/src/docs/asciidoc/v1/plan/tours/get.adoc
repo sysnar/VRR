@@ -1,0 +1,49 @@
+= GET 투어 리스트 조회
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== INFORMATION
+[source,http,options="nowrap"]
+----
+GET /api/v1/plan/tours?cursor=${CURSOR_VALUE} HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Host: localhost:8080
+
+----
+
+현재 존재하는 투어 리스트를 조회합니다. +
+`GET` 으로 별도의 정보없이 요청해 첫 페이지를 조회합니다.
+
+응답은 `JSON` 형식이며, 다음 페이지 조회를 위한 커서 정보를 제공합니다.
+다음 페이지를 조회하시려면 query-string에 `cursor` 를 포함해 요청해야 합니다.
+
+
+== REQUEST
+
+=== Request Query String
+include::{snippets}/v1/plan/tours/request-parameters.adoc[]
+
+=== Request HTTP Example
+include::{snippets}/v1/plan/tours/http-request.adoc[]
+
+
+
+== RESPONSE
+
+=== Response Body
+include::{snippets}/v1/plan/tours/response-body.adoc[]
+
+=== Response Fields
+include::{snippets}/v1/plan/tours/response-fields.adoc[]
+
+=== Response HTTP Example
+include::{snippets}/v1/plan/tours/http-response.adoc[]
+

@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### API Document ###
+**/resources/static/document/**
+
+### QueryDSL QClass ###
+**/src/main/generated/**

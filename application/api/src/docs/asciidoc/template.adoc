@@ -1,0 +1,59 @@
+= POST 로그인
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== INFORMATION
+[source,http,options="nowrap"]
+----
+GET /api/v1/template HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer ${ACCESS_TOKEN}
+Host: localhost:8080
+----
+
+Write Specific Description of this API.
+
+== REQUEST
+
+=== Request Headers
+// include::{snippets}/v1/template/request-headers.adoc[]
+
+=== Request Path Parameters
+// include::{snippets}/v1/template/path-parameters.adoc[]
+
+=== Request Query String
+// include::{snippets}/v1/template/request-parameters.adoc[]
+
+=== Request Body
+// include::{snippets}/v1/template/request-body.adoc[]
+
+=== Request Fields
+// include::{snippets}/v1/template/request-fields.adoc[]
+
+=== Request HTTP Example
+// include::{snippets}/v1/template/http-request.adoc[]
+
+
+== RESPONSE
+
+=== Response Headers
+// include::{snippets}/v1/template/response-headers.adoc[]
+
+=== Response Body
+// include::{snippets}/v1/template/response-fields.adoc[]
+
+=== Response Fields
+// include::{snippets}/v1/template/http-r.adoc[]
+
+=== Response HTTP Example
+// include::{snippets}/v1/template/http-response.adoc[]
+
+

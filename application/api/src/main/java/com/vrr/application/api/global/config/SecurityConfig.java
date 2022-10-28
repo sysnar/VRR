@@ -32,7 +32,7 @@ public class SecurityConfig {
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return web -> web.ignoring().antMatchers("/document/**", "/favicon.ico");
+        return web -> web.ignoring().antMatchers("/document/**", "/resources/**","/resources/public/**");
     }
 
     @Bean
@@ -50,6 +50,7 @@ public class SecurityConfig {
                     .accessDeniedHandler(tokenAccessDeniedHandler)
                 .and()
                     .authorizeRequests()
+                    .antMatchers("/favicon.ico").permitAll()
                     .antMatchers("/api/v1/auth/*").permitAll()
                     .antMatchers(HttpMethod.GET, "/api/v1/plan/tours").permitAll()
                     .antMatchers("/api/**").hasAnyAuthority("[" + RoleType.USER.getCode() + "]")

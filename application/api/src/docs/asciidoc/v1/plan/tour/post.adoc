@@ -1,0 +1,58 @@
+= POST 투어 생성
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+
+== INFORMATION
+[source,http,options="nowrap"]
+----
+POST /api/v1/plan/tour HTTP/1.1
+Content-Type: application/json;charset=UTF-8
+Authorization: Bearer ${ACCESS_TOKEN}
+Host: localhost:8080
+----
+
+로그인 한 사용자는 투어를 계획하여 생성합니다.
+
+사용자 엑세스 토큰(Access Token)을 헤더에 담아 `POST` 로 요청합니다. +
+투어 생성 요청 시 모든 필수값들을 포함해야 하며, `type` 의 경우 반드시 공통코드를 지켜야 합니다.
+
+투어 생성에 성공하였을 경우, 성공한 투어의 고유 ID 값을 응답합니다. +
+응답은 `JSON` 형식이며, 투어 생성 후 다음 단계 진행에 사용할 수 있습니다.
+
+
+== REQUEST
+
+=== Request Headers
+include::{snippets}/v1/plan/tour-post/request-headers.adoc[]
+* `Authorization` 헤더의 자세한 사용 방법은 link:../../../v1/auth/basic-authorization.html[공통 권한 인증 방식]을 참고해주세요.
+
+=== Request Body
+include::{snippets}/v1/plan/tour-post/request-body.adoc[]
+
+=== Request Fields
+include::{snippets}/v1/plan/tour-post/request-fields.adoc[]
+
+=== Request HTTP Example
+include::{snippets}/v1/plan/tour-post/http-request.adoc[]
+
+
+
+== RESPONSE
+
+=== Response Body
+include::{snippets}/v1/plan/tour-post/response-body.adoc[]
+
+=== Response Fields
+include::{snippets}/v1/plan/tour-post/response-fields.adoc[]
+
+=== Response HTTP Example
+include::{snippets}/v1/plan/tour-post/http-response.adoc[]
+

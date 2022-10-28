@@ -32,7 +32,7 @@ VRR 서비스는 아래의 플랫폼들에 대해 OAuth2 인증을 지원합니�
 
 == 2. OAuth2 로그인 프로세스
 === 1. Resource Server URL 요청
-* 사용자는 `/oauth2/authorization/{OAUTH_PROVIDER}?redirect_uri="{redirect_url}"에 요청을 보낸다.
+* 사용자는 `/oauth2/authorization/{OAUTH_PROVIDER}?redirect_uri="{redirect_url}"` 에 요청을 보낸다.
 * 서버는 사용자에게 OAuth2 인증을 처리하기 위한 플랫폼 인증 페이지로 리다이렉션한다.
 * 여기서 redirect_uri는 로그인 프로세스가 모두 종료된 후 사용자에게 Access Token을 전달하는 URI 임으로 사용자가 임의로 선정이 가능하다.
 
@@ -42,12 +42,15 @@ VRR 서비스는 아래의 플랫폼들에 대해 OAuth2 인증을 지원합니�
 * 만약 인증이 실패했을 경우 에러코드를 redirect_url로 전달한다.
 
 === 3. 로그인 완료
-* 로그인 완료시에는 사용자가 전달한 redirect_uri로 Back-End Server 인증 토큰과 함께 리다이렉션된다.
+* 로그인 완료시에는 사용자가 전달한 redirect_url로 Back-End Server 인증 토큰과 함께 리다이렉션된다.
 * 이때 예시는 아래와 같다.
+** e.g. 예시 redirect_url : `http://localhost:3000/oauth`
 
 [source,http,options="nowrap"]
 ----
-REDIECT http://localhost:3000/?token={ACCESS_TOKEN} HTTP/1.1
-SET-COOKIE refresh_token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5MjZEOTZDOTAwMzBERDU4NDI5RDI3NTFBQzFCREJCQyIsImV4cCI6MTY1OTI4NDk5OH0.Cr4yvdQ6pvmjx3jsp7AfA0xq1n8jDwgt7m4zVU7fzyw; Path=/; Max-Age=10080000; Expires=Fri, 18 Nov 2022 08:29:58 GMT; HttpOnly
+REDIECT http://localhost:3000/oauth?token={ACCESS_TOKEN} HTTP/1.1
+SET-COOKIE refresh_token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI5MjZEOTZDOTAwMzBERDU4NDI5RDI3NTFBQzFCREJCQyIsImV4cCI6MTY1OTI4NDk5OH0.Cr4yvdQ6pvmjx3jsp7AfA0xq1n8jDwgt7m4zVU7fzyw;
+           Path=/; Max-Age=10080000;
+           Expires=Fri, 18 Nov 2022 08:29:58 GMT; HttpOnly
 ----
 

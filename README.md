@@ -1,6 +1,15 @@
 # VRR
 VRR 프로젝트
 
+## 프로젝트 문서 
+프로젝트 문서는 크게 2가지로 구성되어 있습니다. 
+- Swagger API 문서
+  - API 요청, 응답에 필요한 Interface 들을 정리합니다.
+  - 링크 : https://XXXXX.com/document/swagger/index.html
+- Rest Docs 상세 API 기술
+  - 오류 코드, 공통 코드, API 사용방법, 사용처 등 API를 활용함에 필요한 세부 정보들을 정리합니다.
+  - 링크 : https://XXXXX.com/document/restdocs/index.html
+
 ## 로컬실행 환경 구성
 로컬 실행환경 구성을 위해선 아래와 같은 명령을 통해 Docker 실행환경을 구축해야 합니다. (테스트 In-Memory 환경이므로 별도)
 
@@ -35,9 +44,9 @@ domain 모듈은 서비스를 구성하는 각 도메인 영역을 정의하는 
 
 #### application 모듈
 application 모듈은 서비스 제공을 위한 표현 계층과 얇은 application service 영역을 포함하는 모듈입니다.  
-API 제공을 위한 `controller`, `application service`, `조회용 repository`로 구성되어 있습니다.
+API 제공을 위한 `api(controller)`, `application service`, `조회용 repository`로 구성되어 있습니다.
 
-```aidl  
+``` 
 └── src
     ├── main
     │   ├── java
@@ -47,13 +56,11 @@ API 제공을 위한 `controller`, `application service`, `조회용 repository`
     │   │               ├── ApiApplication.java
     │   │               ├── domain
     │   │               │   ├── auth
-    │   │               │   │   ├── controller
-    │   │               │   │   ├── dto
+    │   │               │   │   ├── api.v1.auth
     │   │               │   │   ├── repository
     │   │               │   │   └── service
-    │   │               │   └── tour
-    │   │               │       ├── controller
-    │   │               │       ├── dto
+    │   │               │   └── plan
+    │   │               │       ├── api.v1.tour
     │   │               │       ├── repository
     │   │               │       └── service
     │   │               └── global
@@ -66,4 +73,4 @@ API 제공을 위한 `controller`, `application service`, `조회용 repository`
 
 ### 4. 테스팅
 안정적이고, 변화에 유연하게 대응할 수 있는 코드 베이스를 위해 테스트 코드를 사용하고 있습니다.  
-`TDD`혹은 `ATDD`를 상황에 맞게 적용하고 있습니다.
+`Unit Test`혹은 `Aceeptance Test`를 상황에 맞게 적용하고 있습니다.

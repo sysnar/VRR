@@ -18,8 +18,8 @@ public enum CommonErrorCode implements ErrorCode {
     ILLEGAL_ARGUMENT(400, "I002", "Illegal argument."),
 
     // AUTHENTICATION ERROR
-    UNAUTHENTICATED(401, "C005", "Fail to authentication."),
-    UNAUTHORIZED(403, "C006", "Authorization is required to access this resource."),
+    UNAUTHENTICATED(401, "A001", "Fail to authentication."),
+    UNAUTHORIZED(403, "A002", "Authorization is required to access this resource."),
     ;
 
     private final int httpStatus;
